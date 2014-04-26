@@ -30,6 +30,7 @@ class Robot : public IterativeRobot
 	Joystick rightStick;  //Right Joystick
 	Joystick leftStick;  //Left Joystick
 	Joystick gamepad;  //Gamepad
+	JoystickButton launchButton;
 
 public:
 	Robot():
@@ -37,10 +38,11 @@ public:
 		//Note: These must be initialized in the order that they are declared.
 		
 		driveBase(1, 2),  //(leftmotor, rightmotor)
-		cannon1(5),
+		cannon1(8),
 		rightStick(1), //rightStick is USB controller #1.
 		leftStick(2), //leftStick is USB controller #2.
-		gamepad(3) //gamepad is USB controller #3.
+		gamepad(3), //gamepad is USB controller #3.
+		launchButton(&rightStick, 1)
 	{
 		driveBase.SetExpiration(0.1);
 	}
@@ -79,7 +81,7 @@ public:
 		driveBase.TankDrive(leftSpeed, rightSpeed);
 		
 		//Cannon Fire
-		if(rightStick.GetRawButton(1)){
+		if(launchButton.Get()){
 			cannon1.Fire();
 		}
 	}

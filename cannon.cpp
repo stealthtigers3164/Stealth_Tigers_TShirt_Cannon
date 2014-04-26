@@ -12,7 +12,7 @@ Cannon::Cannon(int portInput){
 void RunFireAsync(int port){
 	Relay valve(port);
 	valve.Set(Relay::kOff);
-	sleep(200);	//keep valve open for 2 secs.
+	sleep(2000);	//keep valve open for 2 secs.
 	valve.Set(Relay::kOn);
 	delete &valve;
 }
