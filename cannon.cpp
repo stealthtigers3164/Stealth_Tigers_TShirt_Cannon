@@ -1,18 +1,22 @@
 #include "cannon.h"
 
 Cannon::Cannon(int portInput){
+	
+	cerr<<"Cannon Class Constructing ";
 	port=portInput;
 	
 	Relay valve(port); //These 3 lines make sure the cannon valve is closed on startup.
 	valve.Set(Relay::kOn);
 	delete &valve;
+	cerr<<"Valve Set ";
 
 }
 
 void RunFireAsync(int port){
+	cerr<<"Asynchronous firing process started";
 	Relay valve(port);
 	valve.Set(Relay::kOff);
-	sleep(200);	//keep valve open for 2 secs.
+	sleep(2000);	//keep valve open for 2 secs.
 	valve.Set(Relay::kOn);
 	delete &valve;
 }
